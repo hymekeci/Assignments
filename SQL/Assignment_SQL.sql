@@ -47,3 +47,12 @@ full outer JOIN (select Receiver_ID, SUM (Amount) As Receiver
 from Transactions
 group by Receiver_ID) AS R ON S.Sender_ID = R.Receiver_ID 
 order by Net_Change desc;
+
+SELECT coalesce(R.Receiver_ID, S.Sender_ID) as Account_ID, (coalesce(R.Receiver,0) - coalesce(S.Sender,0)) as Net_Change
+from (select  Sender_ID, sum(Amount) as Sender
+    from Transactions
+    group by Sender_ID) as S
+full outer join (select Receiver_ID, SUM (Amount) As Receiver
+                from Transactions
+                group by Receiver_ID) as R on S.Sender_ID = R.Receiver_ID
+order by Net_Change desc;
