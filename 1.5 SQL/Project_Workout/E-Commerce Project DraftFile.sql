@@ -1,14 +1,11 @@
-
-
 --DAwSQL Session -8 
 
 --E-Commerce Project Solution
 
 
-
 --1. Join all the tables and create a new table called combined_table. (market_fact, cust_dimen, orders_dimen, prod_dimen, shipping_dimen)
-
-
+select Ord_id 
+from orders_dimen_new as orders
 
 
 
@@ -140,7 +137,7 @@
 
 
 
---MONTH-WÝSE RETENTÝON RATE
+--MONTH-Wï¿½SE RETENTï¿½ON RATE
 
 
 --Find month-by-month customer retention rate  since the start of the business.
