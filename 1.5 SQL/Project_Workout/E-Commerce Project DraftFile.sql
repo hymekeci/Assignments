@@ -4,11 +4,23 @@
 
 
 --1. Join all the tables and create a new table called combined_table. (market_fact, cust_dimen, orders_dimen, prod_dimen, shipping_dimen)
-select Ord_id 
-from orders_dimen_new as orders
+
+
+SELECT * INTO combined_table
+FROM 		(SELECT A.Sales,A.Discount,A.Order_Quantity,A.Product_Base_Margin,B.*,C.*,D.*,E.*
+			FROM market_fact A
+			FULL OUTER JOIN orders_dimen_new B ON A.Ord_id = B.Ord_id
+			FULL OUTER JOIN prod_dimen_new C ON A.Prod_id = C.Prod_id
+			FULL OUTER JOIN cust_dimen D ON A.Cust_id= D.Cust_id
+			FULL OUTER JOIN shipping_dimen_new E ON A.Ship_id = E.Ship_id) Q
 
 
 
+
+
+3:47
+SELECT *
+FROM combined_table;
 --///////////////////////
 
 
