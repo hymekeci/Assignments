@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+    .mySlides {display: none}
+    </style>
+    <title>Welcome to Car Price Prediction App</title>
+</head>
+<body class="w3-content w3-border-left w3-border-right">
+
+<nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px" id="mySidebar">
+    <div class="w3-container w3-display-container w3-padding-16">
+        <h3 class="w3-text-purple"><strong>To Make a Prediction</strong></h3>
+        <h5>Please enter the 6 features of the car below</h5>
+        <hr>
+        <form method="POST" action="/">
+        <label for="make">Choose a Make & Model</label><br>
+            <select class="w3-button w3-block w3-white w3-left-align" name="make" id="make">
+                <option value="Audi A3" selected>Audi A3</option>
+                <option value="Audi A1">Audi A1</option>
+                <option value="Opel Astra">Opel Astra</option>
+                <option value="Opel Insignia">Opel Insignia</option>
+                <option value="Opel Corsa">Opel Corsa</option>
+                <option value="Renault Clio">Renault Clio</option>
+                <option value="Renault Espace">Renault Espace</option>
+                <option value="Renault Duster">Renault Duster</option>
+            </select>
+        <hr>
+        <label for="hp">Enter the Horsepower of the Car</label><br>
+        <label for="hp">(Min: 40, Max: 239)</label>
+        <input class="w3-input w3-border" type="number" value="40" name="hp" min="40" max="239"><br>
+        <hr>
+        <label for="hp">Odometer (km)</label>
+        <input class="w3-input w3-border" value="1000" type="number" name="km"><br>
+        <hr>
+        <label for="hp">Age of the Car</label>
+        <select class="w3-button w3-block w3-white w3-left-align" name="age" id="age">
+            <option value="0" selected>0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <hr>
+        <label for="hp">Gear Type</label>
+        <select class="w3-button w3-block w3-white w3-left-align" name="gtype" id="gtype">
+            <option value="Automatic" selected>Automatic</option>
+            <option value="Manual">Manual</option>
+            <option value="Semi-automatic">Semi-Automatic</option>
+        </select>
+        <hr>
+        <label for="hp">Number of Gears</label>
+        <select class="w3-button w3-block w3-white w3-left-align" name="gnumber" id="gnumber">
+            <option value="5" selected>5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
+        <hr>
+        <button class="w3-button w3-block w3-purple w3-center" style="opacity:0.8;" type="submit">Predict</button>
+        </form>
+    </div>
+</nav>
+
+!PAGE CONTENT! -->
+<div class="w3-main w3-white" style="margin-left:260px">
+
+    <div class="w3-container" id="apartment">
+        <h2 class="w3-container w3-text-purple w3-center" style="font-size:40px"><strong>WELCOME TO THE CAR PRICE PREDICTION APP</strong></h2>
+        <div class="w3-container">
+        {% if "Audi A1" in make %}
+            <img src="/static/photos/audi a1.jpeg" style="width:100%;margin-bottom:-6px">
+        {% elif "Audi A3" in make %}
+            <img src="/static/photos/audi a3.webp" style="width:100%;margin-bottom:-6px">
+        {% elif "Opel Astra" in make %}
+            <img src="/static/photos/astra.jpeg" style="width:100%;margin-bottom:-6px">
+        {% elif "Opel Insignia" in make %}
+            <img src="/static/photos/insignia.jpeg" style="width:100%;margin-bottom:-6px">
+        {% elif "Opel Corsa" in make %}
+            <img src="/static/photos/corsa.jpeg" style="width:100%;margin-bottom:-6px">
+        {% elif "Renault Clio" in make %}
+            <img src="/static/photos/clio.jpeg" style="width:100%;margin-bottom:-6px">
+        {% elif "Renault Espace" in make %}
+            <img src="/static/photos/espace.jpeg" alt="Renault Espace" style="width:100%;margin-bottom:-6px">
+        {% elif "Renault Duster" in make %}
+            <img src="/static/photos/duster.webp" style="width:100%;margin-bottom:-6px">
+        {% else %}
+            <img src="/static/photos/cover.png" style="width:100%;margin-bottom:-6px">
+        {% endif %}
+        </div>
+        <hr>
+        <div class="w3-container">
+            {% if res %}
+            <div class="w3-container">
+                <h3 class="w3-text-purple">Your Selections</h3>
+                <table class="w3-table w3-striped w3-light-grey w3-hoverable w3-small">
+                  <thead>
+                    <tr class="w3-purple" style="opacity:0.8">
+                      <th style="text-align:center">Make & Model</th>
+                      <th style="text-align:center">Horsepower</th>
+                      <th style="text-align:center">Odometer</th>
+                      <th style="text-align:center">Age</th>
+                      <th style="text-align:center">Gear Type</th>
+                      <th style="text-align:center">Number of Gears</th>
+                    </tr>
+                  </thead>
+                <tr>
+                  <td style="text-align:center">{{make}}</td>
+                  <td style="text-align:center">{{hp}}</td>
+                  <td style="text-align:center">{{km}}</td>
+                  <td style="text-align:center">{{age}}</td>
+                  <td style="text-align:center">{{gtype}}</td>
+                  <td style="text-align:center">{{gnumber}}</td>
+                </tr>
+                </table>
+            </div>
+            {% else %}
+                <h2 class="w3-text-purple"><strong>Let's make a prediction !!!</strong></h2>
+                <img src="https://media0.giphy.com/media/XHX9s5YLavonUU4Cbr/200w.webp?cid=ecf05e47z2l8vgjtygb9xnk6xk79vv8jxu403sxpz92iph0z&rid=200w.webp&ct=g" style="width:100%;margin-bottom:-6px;align-items: flex-end;">
+            {% endif %}
+        </div>
+        <hr>
+            <div class="w3-container w3-purple" style="margin:auto;bottom:20%;opacity:0.8;width:90%">
+                {% if res %}
+                    <h4 class="w3-text-white"><strong>Random Forest Prediction: $ {{res[0]}}</strong></h4><hr>
+                    <h4 class="w3-text-white"><strong>XGBoost Prediction      : $ {{res[1]}}</strong></h4>
+                {% endif %}
+            </div>
+    </div>
+</div>
+</body>
+</html>
